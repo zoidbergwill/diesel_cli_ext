@@ -31,6 +31,7 @@ pub fn parse(
         ("Jsonb", "Jsonb"),
         ("Uuid", "Uuid"),
         ("Varchar", "String"),
+        ("Array<Text>",  "Vec<Option<T>>"),
     ].iter()
         .cloned()
         .collect();
@@ -93,7 +94,7 @@ pub fn parse(
                 _ => &proto_type_dict,
             };
             let is_optional = _type.clone().contains("Nullable<");
-            let mut type_string = match dict.get(_type.replace("Nullable<","").replace(">","").trim()){
+            let mut type_string = match dict.get(_type.replace("Nullable<","").replacen(">","", 1).trim()){
                 Some(name)=>name,
                 None=> panic!("{} is not recognized. Please free feel to expand the HashMap. This could provide good hints: https://kotiri.com/2018/01/31/postgresql-diesel-rust-types.html", _type)
             };
