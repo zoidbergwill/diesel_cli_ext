@@ -31,7 +31,7 @@ pub fn parse(
         ("Jsonb", "Jsonb"),
         ("Uuid", "Uuid"),
         ("Varchar", "String"),
-        ("Array<Text>",  "Vec<Option<T>>"),
+        ("Array<Text>",  "Vec<Option<String>>"),
     ].iter()
         .cloned()
         .collect();
